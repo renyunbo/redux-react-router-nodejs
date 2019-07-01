@@ -12,6 +12,7 @@ class App extends React.Component{
         return (
            <div>
                <h2>tuanzhang:{boss}</h2>
+               
                <App1 name='li'></App1>
             </div>
         )
