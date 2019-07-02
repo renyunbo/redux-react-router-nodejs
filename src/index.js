@@ -1,12 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import ReactDom from 'react-dom';
+import {createStore} from 'redux';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {counter,addNum,removeNum} from './index.redux';
+import { create } from 'handlebars';
+//redux和react相连接
+// 1.新建store
+const store = createStore(counter);//createStore里面需要传递一个reducer
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+function render(){
+    //2.store已组件属性的方式传递进去
+    ReactDom.render(<App store={store} addNum={addNum} removeNum={removeNum}/>,document.getElementById('root'))
+}
+render();
+//3外界已subscribe的形式订阅render函数，这样状态有什么变化，render会重新执行
+store.subscribe(render)
