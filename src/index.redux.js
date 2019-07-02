@@ -1,4 +1,5 @@
 import { expression } from "@babel/template";
+import { dispatch } from "rxjs/internal/observable/range";
 
 //action Type
 const Add_NUM = 'add_num';
@@ -22,4 +23,14 @@ export function addNum(){
 }
 export function removeNum(){
     return {type:REMOVE_NUM}
+}
+//模拟异步
+export function addNumAsync(){
+    //thunk插件的作用，这里可以返回函数
+    return dispatch =>{
+        setTimeout(() => {
+            //异步结束后，手动执行dispatch
+            dispatch(addNum());
+        }, 2000);
+    }
 }
