@@ -4,14 +4,11 @@ import { addNum, removeNum, addNumAsync } from './index.redux';
 
 @connect(
     //你要state什么属性放到props里
-    state=>({num:state}),
+    state=>({num:state.counter}),
     //你要什么方法，放到props里，自动dispatch
     {addNum, removeNum, addNumAsync}
 )
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         const {num, addNum, removeNum, addNumAsync } = this.props;
 
@@ -22,7 +19,6 @@ class App extends React.Component {
                 <button onClick={removeNum}>remove</button>
                 <button onClick={addNumAsync}>addAsync</button>
             </div>
-
         )
     }
 }
